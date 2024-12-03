@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario de Pago</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    .payment-container {
+      max-width: 600px;
+      margin: 50px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: bold;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .form-group button {
+      width: 100%;
+      padding: 10px;
+      background-color: #ff9800;
+      color: white;
+      border: none;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .form-group button:hover {
+      background-color: #e68900;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="payment-container">
+    <h2>Formulario de Pago</h2>
+    <form id="payment-form">
+      <div class="form-group">
+        <label for="name">Nombre Completo</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="card-number">Número de Tarjeta</label>
+        <input type="text" id="card-number" name="card-number" required>
+      </div>
+      <div class="form-group">
+        <label for="expiration-date">Fecha de Expiración</label>
+        <input type="month" id="expiration-date" name="expiration-date" required>
+      </div>
+      <div class="form-group">
+        <label for="cvv">Código CVV</label>
+        <input type="text" id="cvv" name="cvv" required>
+      </div>
+      <div class="form-group">
+        <label for="address">Dirección de Envío</label>
+        <input type="text" id="address" name="address" required>
+      </div>
+      <button type="submit">Realizar Pago</button>
+    </form>
+  </div>
+
+  <script>
+    // Captura el formulario y procesa los datos
+    document.getElementById('payment-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const formData = new FormData(this);
+      const data = {
+        name: formData.get('name'),
+        cardNumber: formData.get('card-number'),
+        expirationDate: formData.get('expiration-date'),
+        cvv: formData.get('cvv'),
+        address: formData.get('address')
+      };
+
+      // Guardamos los datos del usuario en sessionStorage
+      sessionStorage.setItem('userName', data.name);
+      sessionStorage.setItem('userAddress', data.address);
+
+      // Enviar los datos al servidor
+      fetch('procesar_pago.php', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => response.json())
+      .then(result => {
+        if (result.success) {
+          // Redirigir a la página de confirmación si el pago fue exitoso
+          window.location.href = 'confirmacion.html';
+        } else {
+          alert('Hubo un error en el pago.');
+        }
+      })
+      .catch(error => {
+        alert('Error en la conexión');
+      });
+    });
+  </script>
+
+</body>
+</html>

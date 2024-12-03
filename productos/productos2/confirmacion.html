@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confirmación de Pago</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    .confirmation-container {
+      max-width: 800px;
+      margin: 50px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #4caf50;
+    }
+
+    .summary {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+
+    .summary p {
+      margin: 5px 0;
+    }
+
+    .back-btn {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .back-btn a {
+      color: #ff9800;
+      text-decoration: none;
+    }
+
+    .back-btn a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="confirmation-container">
+    <h2>¡Pago Exitoso!</h2>
+    <p style="text-align: center; color: #4caf50;">¡Gracias por tu compra! Tu pago ha sido procesado correctamente y tu pedido está en camino.</p>
+
+    <div class="summary">
+      <h3>Resumen de tu compra:</h3>
+      <p><strong>Nombre:</strong> <span id="confirm-name"></span></p>
+      <p><strong>Dirección de Envío:</strong> <span id="confirm-address"></span></p>
+      <p><strong>Detalles del Pedido:</strong></p>
+      <div id="confirm-items"></div>
+      <p><strong>Total: $</strong><span id="confirm-total"></span></p>
+    </div>
+
+    <div class="back-btn">
+      <a href="produc2.php">← Volver al inicio</a>
+    </div>
+  </div>
+
+  <script>
+    // Obtener los datos almacenados en sessionStorage
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const userName = sessionStorage.getItem('userName');
+    const userAddress = sessionStorage.getItem('userAddress');
+
+    // Mostrar los datos en el resumen de compra
+    document.getElementById('confirm-name').textContent = userName;
+    document.getElementById('confirm-address').textContent = userAddress;
+
+    const confirmItemsContainer = document.getElementById('confirm-items');
+    let total = 0;
+
+    cart.forEach(item => {
+      const div = document.createElement('div');
+      div.innerHTML = `
+        <p><strong>${item.size}</strong> - $${item.total}</p>
+        <p>Extras: ${item.extras.join(', ') || 'Ninguno'}</p>
+        <p>Ingredientes eliminados: ${item.removes.join(', ') || 'Ninguno'}</p>
+        <hr>
+      `;
+      confirmItemsContainer.appendChild(div);
+      total += item.total;
+    });
+
+    document.getElementById('confirm-total').textContent = total;
+
+  </script>
+
+</body>
+</html>

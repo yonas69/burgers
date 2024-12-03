@@ -1,0 +1,86 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.pedido-header {
+    font-size: 2.5em;
+    font-weight: bold;
+}
+
+.productos, .resumen, .agregar-mas {
+    background-color: white;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.productos img {
+    width: 50px;
+    height: 50px;
+    vertical-align: middle;
+}
+
+.productos span {
+    font-size: 1.2em;
+    margin-left: 10px;
+}
+
+.subtotal {
+    text-align: right;
+    font-size: 1.5em;
+}
+
+.subtotal .amount {
+    font-weight: bold;
+}
+
+.limpiar {
+    float: right;
+    color: blue;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.agregar-mas h3 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+}
+
+.productos-adicionales img {
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
+}
+
+.productos-adicionales {
+    display: flex;
+    justify-content: space-around;
+}
+
+.btn-siguiente {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background-color: #FFCC00;
+    border: none;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: black;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.btn-siguiente:hover {
+    background-color: #ffbb00;
+}

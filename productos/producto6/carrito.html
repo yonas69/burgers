@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrito Detallado</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f5;
+    }
+
+    .cart-container {
+      max-width: 800px;
+      margin: 20px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #ddd;
+      padding: 10px 0;
+    }
+
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+
+    .item-details {
+      flex: 1;
+    }
+
+    .item-details p {
+      margin: 5px 0;
+    }
+
+    .item-price {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .cart-summary {
+      margin-top: 20px;
+      text-align: right;
+    }
+
+    .cart-summary p {
+      font-size: 18px;
+      margin: 5px 0;
+    }
+
+    .checkout-btn {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      background-color: #ff9800;
+      color: white;
+      border: none;
+      font-size: 18px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .checkout-btn:hover {
+      background-color: #ff9800;
+    }
+
+    .back-btn {
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .back-btn a {
+      color: #ff9800;
+      text-decoration: none;
+    }
+
+    .back-btn a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="cart-container">
+    <h1>Carrito Detallado</h1>
+    <div id="cart-items"></div>
+    <div class="cart-summary">
+      <p><strong>Total: $<span id="cart-total">0</span></strong></p>
+    </div>
+    <button class="checkout-btn" onclick="goToPayment()">Proceder al Pago</button>
+
+    <div class="back-btn">
+      <a href="formulario.html">← Volver al Menú</a>
+    </div>
+  </div>
+
+  <script>
+    function goToPayment() {
+      window.location.href = "pago.html"; 
+    }
+
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    function renderCart() {
+      const cartItemsContainer = document.getElementById('cart-items');
+      cartItemsContainer.innerHTML = '';
+      let total = 0;
+
+      cart.forEach((item, index) => {
+        const div = document.createElement('div');
+        div.classList.add('cart-item');
+        div.innerHTML = `
+          <div class="item-details">
+            <p><strong>${item.size}</strong></p>
+            <p>Extras: ${item.extras.join(', ') || 'Ninguno'}</p>
+            <p>Ingredientes eliminados: ${item.removes.join(', ') || 'Ninguno'}</p>
+          </div>
+          <div class="item-price">
+            $${item.total}
+          </div>
+        `;
+        cartItemsContainer.appendChild(div);
+        total += item.total;
+      });
+
+      document.getElementById('cart-total').textContent = total;
+    }
+
+    renderCart();
+  </script>
+</body>
+</html>
+

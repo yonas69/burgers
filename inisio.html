@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat de Ayuda</title>
+    <link rel="stylesheet" href="sdi.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+       
+        .chat-container {
+            display: none; 
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 400px;
+            height: 500px;
+            background-color: #f1f1f1;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+        }
+        .chat-header {
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+            font-weight: bold;
+            font-size: 18px;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .close-chat {
+            cursor: pointer;
+            color: white;
+            font-size: 20px;
+        }
+        .chat-content {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            background-color: #f9f9f9;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .bot-message, .user-message {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .bot-message .message {
+            background-color: #d1e7ff;
+            color: #333;
+        }
+        .user-message .message {
+            background-color: #007bff;
+            color: white;
+            align-self: flex-end;
+        }
+        .message {
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 70%;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .user-input {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #ccc;
+            background-color: white;
+        }
+        .user-input input {
+            flex: 1;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .user-input button {
+            margin-left: 10px;
+            padding: 8px 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        
+        .robot {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 10px;
+            animation: bounce 1s infinite alternate;
+        }
+        .robot .head {
+            width: 60px;
+            height: 60px;
+            background-color: #007bff;
+            border-radius: 50%;
+            position: relative;
+        }
+        .robot .eye {
+            width: 10px;
+            height: 10px;
+            background-color: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 20px;
+        }
+        .robot .eye.left {
+            left: 15px;
+        }
+        .robot .eye.right {
+            right: 15px;
+        }
+        .robot .mouth {
+            width: 20px;
+            height: 6px;
+            background-color: white;
+            border-radius: 10px;
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: height 0.3s ease;
+        }
+        .robot .mouth.open {
+            height: 12px;
+        }
+
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-5px); }
+        }
+
+        
+        .question-button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            max-width: 100%;
+        }
+        .question-button:hover {
+            background-color: #0056b3;
+        }
+        .admin-key-container {
+            display: none; 
+            margin-bottom: 10px; 
+        }
+
+        
+        body.dark-mode {
+            background-color: #333;
+            color: #fff;
+        }
+        .chat-container.dark-mode {
+            background-color: #444;
+        }
+        .chat-header.dark-mode {
+            background-color: #222;
+        }
+        .user-input.dark-mode {
+            background-color: #555;
+        }
+        .login-container.dark-mode {
+            background-color: #444; 
+            color: #fff; 
+            padding: 20px;
+            border-radius: 10px; 
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <img src="nueva_imagen_cabecera.png" alt="Imagen de Cabecera" class="header-image">
+        <h2>¡Hola, bienvenido a cecyBurgers!</h2>
+        <h2>Inicia sesión</h2>
+
+        <div class="admin-key-container" id="adminKeyContainer">
+            <label for="adminKey">Llave de Administrador:</label>
+            <input type="text" id="adminKey" class="text-input">
+        </div>
+
+        <form id="loginForm" onsubmit="return login();">
+            <label for="nombre">Usuario:</label>
+            <input type="text" id="nombre" required class="text-input">
+            <label for="contraseña">Contraseña:</label>
+            <input type="password" id="contraseña" required class="text-input">
+            <button type="submit" class="login-button">Iniciar Sesión</button>
+        </form>
+
+        <div class="button-container">
+            <h2>
+                <a href="admin.html">
+                    <button class="admin-button">soy administrador</button>
+                </a>
+            </h2>
+        </div>
+        
+
+        <a href="recuperar_contraseña.php" class="forgot-password">
+            <i class="fas fa-lock"></i> ¿Olvidaste tu contraseña?
+        </a>
+
+        <div class="button-container">
+            <h2>No tienes cuenta? <button class="secondary-button" onclick="redirigir()">Regístrate</button></h2>
+        </div>
+
+        <div class="social-media">
+            <h2>Desarrollado por:</h2>
+            <a href="servicios.html" target="_blank">ProgALT</a>
+        </div>
+
+        <button class="help-button" onclick="toggleChat()">
+            <i class="fas fa-question-circle"></i> Ayuda
+        </button>
+    </div>
+
+    <div class="chat-container" id="chatContainer">
+        <div class="chat-header">
+            Centro de Ayuda
+            <span class="close-chat" onclick="toggleChat()">×</span>
+        </div>
+        <div class="chat-content" id="chatContent">
+            <div class="bot-message">
+                <div class="robot" id="robot">
+                    <div class="head">
+                        <div class="eye left"></div>
+                        <div class="eye right"></div>
+                        <div class="mouth" id="robotMouth"></div>
+                    </div>
+                </div>
+                <div class="message">¡Hola! Estoy aquí para ayudarte. ¿En qué puedo ayudarte hoy?</div>
+            </div>
+        </div>
+        <div class="user-input">
+            <input type="text" id="userQuestion" placeholder="Escribe tu pregunta aquí..." onkeypress="checkEnter(event)">
+            <button onclick="sendQuestion()">Enviar</button>
+        </div>
+    </div>
+
+    <script>
+        function redirigir() {
+            window.location.href = "rgistro.php"; 
+        }
+        function login() {
+            const nombre = document.getElementById('nombre').value;
+            const contraseña = document.getElementById('contraseña').value;
+            const adminKey = document.getElementById('adminKey').value;
+
+            
+            localStorage.setItem('usuario', nombre); 
+
+            
+            window.location.href = 'splash.html';
+
+            return false; 
+        }
+
+        function toggleChat() {
+            const chatContainer = document.getElementById('chatContainer');
+            chatContainer.style.display = chatContainer.style.display === 'none' || chatContainer.style.display === '' ? 'flex' : 'none';
+            if (chatContainer.style.display === 'flex') {
+                displayWelcomeMessage();
+            }
+        }
+
+        function displayWelcomeMessage() {
+            const chatContent = document.getElementById('chatContent');
+            const welcomeMessage = document.createElement('div');
+            welcomeMessage.classList.add('bot-message');
+            welcomeMessage.innerHTML = `<div class="message">¡Hola! Estoy aquí para ayudarte. ¿En qué puedo ayudarte hoy?</div>`;
+            chatContent.appendChild(welcomeMessage);
+            speak('¡Hola! Estoy aquí para ayudarte. ¿En qué puedo ayudarte hoy?'); 
+        }
+
+        function sendQuestion() {
+            const userInput = document.getElementById('userQuestion');
+            const userMessage = userInput.value.trim();
+
+            if (userMessage === '') return;
+
+            const chatContent = document.getElementById('chatContent');
+            const userMessageElement = document.createElement('div');
+            userMessageElement.classList.add('user-message');
+            userMessageElement.innerHTML = `<div class="message">${userInput.value}</div>`;
+            chatContent.appendChild(userMessageElement);
+
+            // Simula la respuesta del bot
+            setTimeout(() => {
+                respondToUserMessage(userMessage);
+                userInput.value = ''; // Limpiar el campo de entrada
+            }, 500);
+        }
+
+        function respondToUserMessage(message) {
+            const chatContent = document.getElementById('chatContent');
+            const botMessageElement = document.createElement('div');
+            botMessageElement.classList.add('bot-message');
+
+            const robotMouth = document.getElementById('robotMouth');
+            robotMouth.classList.add('open'); 
+
+            setTimeout(() => {
+                robotMouth.classList.remove('open'); 
+            }, 300);
+
+            let response = '';
+            if (message.includes('restablecer contraseña')) {
+                response = 'Para restablecer tu contraseña, ve a la sección "Olvidé mi contraseña" en la página de inicio de sesión, llena los campos solicitados y escoje una opcion de recuperacion depues se te informara los pasos a seguir.';
+            } else if (message.includes('crear cuenta')) {
+                response = 'Para crear una cuenta, haz clic en el botón "Regístrate" y sigue las instrucciones.';
+            } else if (message.includes('extraviar llave de admistrador')) {
+                response = 'Si extraviaste tu llave de acceso de administrador, contacta a soporte técnico.';
+            } else if (message.includes('horarios')) {
+                response = 'Nuestros horarios son de lunes a viernes de 9 a 18 horas.';
+            } else if (message.includes('metodos de pago')) {
+                response = 'Aceptamos tarjetas de crédito, débito y pagos en efectivo.';
+            } else if (message.includes('promociones')) {
+                response = 'Visita nuestra sección de promociones en la página principal para conocer las ofertas.';
+            } else if (message.includes('Como puedo eliminar mi cuenta')) {
+                response = 'una vez inisies sesion accede al apartado mi perfil y seleciona la opcion de eliminar perfil se te pedira confirmacion via correo electronico.';
+            } else if (message.includes('Qué debo hacer si recibo un mensaje de error que dice "credenciales incorrectas')) {
+                response = 'trata de ingresar de nuevo y verificar cada credencial ,si el problema sigue contacta con soporte tecnico.';
+            } else if (message.includes('Qué opciones tengo si no recuerdo mi nombre de usuario')) {
+                response = 'accede al apartado olvide mi contraseña o nombre de usuario y sigue los pasos que se indican.';
+            } else if (message.includes('contacto')) {
+                response = 'Puedes contactarnos a través de nuestro correo electrónico: soporte@cecyburgers.com.';
+            } else {
+                response = 'Lo siento, no tengo una respuesta para eso. ¿Te gustaría que te ayude con otra cosa?';
+            }
+
+            botMessageElement.innerHTML = `<div class="message">${response}</div>`;
+            chatContent.appendChild(botMessageElement);
+            chatContent.scrollTop = chatContent.scrollHeight; 
+
+            
+            speak(response);
+        }
+
+        function speak(text) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.voice = getFriendlyVoice(); 
+            utterance.pitch = 1.2; 
+            utterance.rate = 1; 
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function getFriendlyVoice() {
+            const voices = window.speechSynthesis.getVoices();
+            
+            return voices.find(voice => voice.name.toLowerCase().includes('siri')) || voices[0]; 
+        }
+
+        function checkEnter(event) {
+            if (event.key === 'Enter') {
+                sendQuestion();
+            }
+        }
+    </script>
+</body>
+</html>

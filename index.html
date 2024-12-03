@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página - cecyBurgers</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header">
+    <div class="menu container">
+        <a href="imagenes/logo.jpeg" class="logo"></a>
+        <input type="checkbox" id="menu"/>
+        <label for="menu">
+            <img src="imagenes/menu.png" class="menu-icono" alt="menu">
+        </label>
+        <nav class="navbar">
+            <ul>
+                <li><a href="index.html">inicio</a></li>
+                <li><a href="servicios.html">Servicios</a></li>
+                <li><a href="menuprincipal.html">Compra aqui</a></li>
+                <li><a href="contactanos1.html">Contacto</a></li>
+
+                <li id="userInfo"></li> 
+            </ul>
+        </nav>
+    </div>
+
+    <div class="header-content container">
+        <div class="header-txt">
+            <h1>EL mejor menú que puedas elegir</h1>
+            <p>
+                Descubre el mejor menú que puedas elegir en nuestra tienda de hamburguesas, donde la calidad y el sabor se unen para ofrecerte una experiencia única.
+                Nuestras hamburguesas están hechas con carne 100% de primera calidad, ingredientes frescos y combinaciones irresistibles que van desde lo clásico hasta lo gourmet.
+                ¡Ven y disfruta del mejor sabor en cada mordida!
+            </p>
+            <a href="menuprincipal.html" class="btn-1">información</a>
+        </div>
+        <div class="header-img">
+            <img src="imagenes/right.png" alt="">
+        </div>
+    </div>
+</header>
+
+<section class="information">
+    <div class="information-content container">
+        <div class="information-box">
+            <div class="card-1">
+                <img src="imagenes/c1.png" alt="">
+                <h3>Hamburguesa</h3>
+                <p>Calidad premium</p>
+                <span>$50.00</span>
+            </div>
+            <div class="card-1">
+                <img src="imagenes/c2.png" alt="">
+                <h3>Hamburguesa</h3>
+                <p>Calidad premium</p>
+                <span>$50.00</span>
+            </div>
+        </div>
+        <div class="information-txt">
+            <h2>Puedes venir a nuestros establecimientos o por la app</h2>
+            <p>
+                Puedes disfrutar de nuestras irresistibles hamburguesas de tres maneras: visitando cualquiera de nuestros establecimientos, a través de nuestra app, o directamente desde esta página donde te encuentras.
+                ¡Elige la opción que más te convenga y saborea lo mejor en cualquier lugar, ya sea con un clic o en persona!
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="general">
+    <div class="general-content container">
+        <div class="general-txt">
+            <h2>Lo mejor de la calidad en hamburguesas</h2>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto impedit, dolore mollitia esse quam asperiores 
+                laudantium non repellat amet quia temporibus eaque cumque id iusto quaerat excepturi officiis debitis commodi!
+            </p>
+            <a href="#" class="btn-1">Información</a>
+        </div>
+        <div class="general-img">
+            <img src="imagenes/ha1.png" alt="">
+        </div>
+    </div>
+</section>
+
+<section class="app">
+    <div class="app-content container">
+        <div class="app-img">
+            <img src="imagenes/app.png" alt="">
+        </div>
+        <div class="app-txt">
+            <h2>Descarga nuestra app</h2>
+            <p>
+                Descarga nuestra app y lleva el sabor de nuestras hamburguesas a donde quieras. Con solo unos toques en tu teléfono, podrás explorar el menú, realizar pedidos y disfrutar de promociones exclusivas, todo desde la comodidad de tu hogar o donde estés. 
+                ¡Descárgala ahora y disfruta de la mejor experiencia de hamburguesas!
+            </p>
+            <div class="app-icons">
+                <img src="imagenes/android.png" alt="">
+                <img src="imagenes/mac.png" alt="">
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="footer-content container">
+        <div class="link">
+            <h3>lorem</h3>
+            <ul>
+                <li><a href="#">Lorem</a> </li>
+                <li><a href="#">Lorem</a> </li>
+                <li><a href="#">Lorem</a> </li>
+                <li><a href="#">Lorem</a> </li>
+            </ul>
+        </div>
+        <div class="link">
+            <h3>lorem</h3>
+            <ul>
+                <li><a href="#">Lorem</a> </li>
+                <li><a href="#">Lorem</a> </li>
+                <li><a href="#">Lorem</a> </li>
+                <li><a href="#">Lorem</a> </li>
+            </ul>
+        </div>
+        <div class="link">
+            <h3>lorem</h3>
+            <ul>
+                <li><a href="#">Lorem</a> </li>
+                <li><a href="#">Lorem</a> </li>
+                <li><a href="#">Lorem</a> </li>
+                <li><a href="#">Lorem</a> </li>
+            </ul>
+        </div>
+        <div class="link">
+            <h3>lorem</h3>
+            <ul>
+                <li><a href="#">Lorem</a> </li>
+                <li><a href="#">Lorem</a> </li>
+                <li><a href="#">Lorem</a> </li>
+                <li><a href="#">Lorem</a> </li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+
+<script>
+    const usuario = localStorage.getItem('usuario');
+    if (usuario) {
+        document.getElementById('userInfo').innerHTML = `
+            <span>Hola, ${usuario} </span>
+            <button onclick="redirigirPerfil()">👤</button>
+            <a href="#" onclick="cerrarSesion()">Cerrar sesión</a>
+        `;
+    } else {
+        document.getElementById('userInfo').innerHTML = `<a href="inisio.html">Iniciar sesión</a>`;
+    }
+
+    function cerrarSesion() {
+        localStorage.removeItem('usuario'); 
+        window.location.href = 'index.html'; 
+    }
+
+    function redirigirPerfil() {
+        window.location.href = 'perfil.php'; 
+    }
+</script>
+
+</body>
+</html>

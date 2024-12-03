@@ -1,0 +1,132 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+  }
+  
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .menu .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff9800;
+  }
+  
+  .location {
+    font-size: 14px;
+    color: #888;
+  }
+  
+  main {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 15px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .product, .order-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .burger-image {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 8px;
+  }
+  
+  .product-info h1, .order-page h1 {
+    font-size: 28px;
+    color: #222;
+    margin-bottom: 10px;
+  }
+  
+  .product-info p, .order-page p {
+    font-size: 16px;
+    margin: 5px 0;
+    color: #555;
+  }
+  
+  .order-btn, .submit-btn {
+    background-color: #ff9800;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .order-btn:hover, .submit-btn:hover {
+    background-color: #e68a00;
+  }
+  
+  .size-options {
+    display: flex;
+    gap: 15px;
+    margin: 20px 0;
+  }
+  
+  .size-btn {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+  }
+  
+  .size-btn:hover {
+    background-color: #ff9800;
+    color: #fff;
+    border-color: #ff9800;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 500px;
+  }
+  
+  form label {
+    font-size: 14px;
+    color: #555;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  form input, form textarea {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  form textarea {
+    resize: none;
+    height: 100px;
+  }
+  

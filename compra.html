@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grand Tasty Doble</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff; /* Fondo gris oscuro */
+            color: rgb(0, 0, 0); /* Letras blancas */
+        }
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background-color: #444; /* Fondo más oscuro para el header */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        header img {
+            height: 40px;
+        }
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+        .login-btn {
+            background-color:  #28a745;
+            border: none;
+            color: rgb(255, 255, 255);
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .main-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            gap: 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .main-content img {
+            width: 400px;
+            border-radius: 10px;
+        }
+        .product-details {
+            flex: 1;
+            text-align: left;
+        }
+        .product-details h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: rgb(0, 0, 0);
+        }
+        .product-details p {
+            color: #000000; /* Letras grises claras */
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .order-btn {
+            background-color:  #28a745;
+            border: none;
+            color: rgb(255, 255, 255);
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .info-section {
+            margin-top: 40px;
+        }
+        .info-section h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            color:  #28a745; /* Amarillo para destacar */
+        }
+        .info-section h2:hover {
+            color: white;
+        }
+        .info-details {
+            display: none;
+            margin-top: 10px;
+            border: 1px solid #555;
+            border-radius: 5px;
+            padding: 15px;
+            background-color: #444; /* Fondo gris oscuro */
+        }
+        .info-details table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        .info-details th, .info-details td {
+            border: 1px solid #555;
+            padding: 10px;
+            text-align: left;
+            color: white;
+        }
+        .info-details th {
+            background-color: #555; /* Fondo más oscuro para cabeceras */
+        }
+        .info-summary {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #555; /* Fondo gris oscuro */
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        .info-summary div {
+            text-align: center;
+            flex: 1;
+            color: white;
+        }
+        .info-summary div:not(:last-child) {
+            border-right: 1px solid #666; /* Líneas separadoras más claras */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/McDonald%27s_Golden_Arches.svg/512px-McDonald%27s_Golden_Arches.svg.png" alt="Logo">
+            <nav>
+                <a href="#">Productos</a>
+                <a href="#">En familia</a>
+                <a href="#">Receta del Futuro</a>
+            </nav>
+        </div>
+        <button class="login-btn">Ingresar</button>
+    </header>
+    <div class="main-content">
+        <img src="imagenes/GRAND TASTY DOBLE" alt="Grand Tasty Doble">
+        <div class="product-details">
+            <h1>GRAND TASTY DOBLE</h1>
+            <p>
+                Inigualable pan jumbo con semillas de ajonjolí, 2 piezas de carne 100% res,
+                3 rebanadas de nuestro exclusivo Queso Cheddar, cebolla, lechuga y tomate frescos.
+                Sumado a estos ingredientes la única e inigualable Salsa Tasty, un exclusivo sabor McDonald’s.
+            </p>
+            <a href="productos/producto2/producto2.html" class="order-btn">Comenzar pedido</a>
+            <div class="info-section">
+                <h2 onclick="toggleInfo()">Información nutricional</h2>
+                <div class="info-details" id="info-details">
+                    <div class="info-summary">
+                        <div>1444Kcal<br><small>Calorías</small></div>
+                        <div>108g<br><small>Grasas</small></div>
+                        <div>60g<br><small>Carbohidratos</small></div>
+                        <div>60g<br><small>Proteínas</small></div>
+                        <div>3223mg<br><small>Sodio</small></div>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Información Nutricional</th>
+                                <th>Por Producto</th>
+                                <th>I.D.R%</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Calorías (Kcal)</td>
+                                <td>1444Kcal</td>
+                                <td>0%</td>
+                            </tr>
+                            <tr>
+                                <td>Grasas</td>
+                                <td>108g</td>
+                                <td>0%</td>
+                            </tr>
+                            <tr>
+                                <td>Carbohidratos Totales</td>
+                                <td>60g</td>
+                                <td>0%</td>
+                            </tr>
+                            <tr>
+                                <td>Proteínas</td>
+                                <td>60g</td>
+                                <td>0%</td>
+                            </tr>
+                            <tr>
+                                <td>Sodio</td>
+                                <td>3223mg</td>
+                                <td>0%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function toggleInfo() {
+            const details = document.getElementById('info-details');
+            details.style.display = details.style.display === 'none' || details.style.display === '' ? 'block' : 'none';
+        }
+    </script>
+</body>
+</html>

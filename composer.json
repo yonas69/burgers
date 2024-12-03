@@ -1,0 +1,19 @@
+{
+    "name": "twilio/sdk",
+    "description": "comida",
+    "type": "project",
+    "require": {
+        "twilio/sdk": "^8.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Twilio\\Sdk\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "yonathan",
+            "email": "yonajaziespinosa@gmail.com"
+        }
+    ]
+}

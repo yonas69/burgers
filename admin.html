@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de Sesión - Administrador</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+
+        .login-container {
+            background-color: #ffffff;
+            width: 400px;
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .login-container h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #003366;
+        }
+
+        .login-container .logo {
+            width: 80px;
+            margin-bottom: 20px;
+        }
+
+        .login-container form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .login-container input {
+            margin-bottom: 15px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .login-container input:focus {
+            border-color: #003366;
+        }
+
+        .login-container button {
+            padding: 10px;
+            font-size: 16px;
+            color: #ffffff;
+            background-color: #003366;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .login-container button:hover {
+            background-color: #005599;
+        }
+
+        .login-container .footer {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .login-container .footer a {
+            color: #003366;
+            text-decoration: none;
+        }
+
+        .login-container .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <img src="logo.png" alt="Logo Empresa" class="logo">
+        <h1>Inicio de Sesión - Administrador</h1>
+        <form action="procesar_sesion.php" method="post">
+            <input type="text" name="username" placeholder="Nombre de usuario" required>
+            <input type="password" name="password" placeholder="Contraseña" required>
+            <input type="text" name="admin_code" placeholder="Código de administrador" required>
+            <button type="submit">Iniciar Sesión</button>
+        </form>
+        <div class="footer">
+            <p>¿Olvidaste tu contraseña? <br> 
+            <a href="#" onclick="alert('Por favor, contacte al administrador superior para recuperar sus datos.')">
+                Recuperar datos
+            </a></p>
+        </div>
+    </div>
+</body>
+</html>

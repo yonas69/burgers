@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario de Pedido</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f5;
+    }
+
+    header {
+      background-color: #ff9800;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cart {
+      cursor: pointer;
+      position: relative;
+    }
+
+    .cart span {
+      background-color: #ff9800;
+      color: white;
+      font-size: 12px;
+      border-radius: 50%;
+      padding: 2px 6px;
+      position: absolute;
+      top: -5px;
+      right: -10px;
+    }
+
+    .order-container {
+      max-width: 700px;
+      margin: 20px auto;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .order-header {
+      padding: 20px;
+      background-color: #fff5f5;
+      text-align: center;
+    }
+
+    .order-header h1 {
+      margin: 10px 0;
+    }
+
+    .order-header p {
+      color: #ff9800;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .order-content {
+      padding: 20px;
+    }
+
+    .burger-image {
+      display: block;
+      margin: 20px auto;
+      width: 100%;
+      max-width: 300px;
+    }
+
+    .options {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .options button {
+      background-color: #ff9800;
+      color: white;
+      border: none;
+      padding: 8px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+      margin: 5px;
+      width: auto;
+    }
+
+    .options button:hover {
+      background-color: #e68a00;
+    }
+
+    .extras, .remove-options {
+      display: none;
+      margin-top: 10px;
+    }
+
+    .extras ul, .remove-options ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .extras li, .remove-options li {
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      padding: 10px;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 15px;
+      background-color: #ff9800;
+      color: white;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      border-radius: 0 0 8px 8px;
+    }
+
+    .submit-btn:hover {
+      background-color: #e68a00;
+    }
+
+    .cart-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .cart-modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .cart-modal-content h2 {
+      margin-bottom: 10px;
+    }
+
+    .cart-items {
+      margin-bottom: 20px;
+    }
+
+    .cart-items p {
+      margin: 5px 0;
+    }
+
+    .close-btn {
+      background-color: #ff9800;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .close-btn:hover {
+      background-color: #e68a00;
+    }
+
+    .view-cart-btn {
+      margin-top: 15px;
+      width: 100%;
+      padding: 12px;
+      background-color: #ff9800;
+      color: white;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .view-cart-btn:hover {
+      background-color: #e68a00;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>🍔 Cecyburgers</div>
+    <div class="cart" onclick="toggleCartModal()">🛒 Carrito <span id="cart-count">0</span></div>
+  </header>
+
+  <div class="order-container">
+    <div class="order-header">
+      <h1>Fanta</h1>
+      <p>Desde $20</p>
+    </div>
+    <div class="order-content">
+      <img src="fanta.jpg" alt="Hamburguesa" class="burger-image">
+      <div class="options">
+        <h3>Aplicar Cupón:</h3>
+        <input type="text" id="coupon-code" placeholder="Ingresa tu código" style="width: 100%; padding: 10px; margin-bottom: 10px;">
+        <button onclick="applyCoupon()" style="width: 100%; padding: 10px; background-color: #ff9800; color: white; border: none;">Aplicar Cupón</button>
+      </div>
+      <div class="subtotal">
+        Subtotal: $<span id="subtotal">20</span>
+      </div>
+    </div>
+    <button class="submit-btn" onclick="addToCart()">Añadir al carrito</button>
+  </div>
+
+  <div class="cart-modal" id="cart-modal">
+    <div class="cart-modal-content">
+      <h2>Carrito</h2>
+      <div id="cart-items" class="cart-items"></div>
+      <div id="cart-coupons"></div>
+      <p><strong>Total: $<span id="cart-total">0</span></strong></p>
+      <button class="close-btn" onclick="toggleCartModal()">Cerrar</button>
+      <button class="view-cart-btn" onclick="goToCart()">Ver Carrito</button>
+    </div>
+  </div>
+  <script>
+    function goToCart() {
+      
+      localStorage.setItem('cart', JSON.stringify(cart));
+      
+      window.location.href = 'carrito.html';
+    }
+    </script>
+   <script>
+    let cart = [];
+    let basePrice = 20; // Precio base de la hamburguesa
+    let subtotal = basePrice;
+    let couponDiscount = 0;
+    let appliedCoupons = [];
+  
+    // Función para mostrar/ocultar el menú de extras
+    function toggleExtras() {
+      const extras = document.querySelector('.extras');
+      extras.style.display = extras.style.display === 'block' ? 'none' : 'block';
+    }
+  
+    // Función para mostrar/ocultar el menú de eliminaciones
+    function toggleRemoveOptions() {
+      const removeOptions = document.querySelector('.remove-options');
+      removeOptions.style.display = removeOptions.style.display === 'block' ? 'none' : 'block';
+    }
+  
+    // Calcular el subtotal con extras, eliminaciones y cupones
+    function updateSubtotal() {
+      let extraCost = 0;
+      let removeDiscount = 0;
+  
+      // Sumar extras seleccionados
+      document.querySelectorAll('.extras input:checked').forEach(extra => {
+        extraCost += parseInt(extra.value);
+      });
+  
+      // Restar eliminaciones seleccionadas
+      document.querySelectorAll('.remove-options input:checked').forEach(remove => {
+        removeDiscount += parseInt(remove.value);
+      });
+  
+      // Calcular el nuevo subtotal
+      subtotal = basePrice + extraCost + removeDiscount - couponDiscount;
+  
+      // Mostrar el subtotal en pantalla
+      document.getElementById('subtotal').textContent = subtotal >= 0 ? subtotal : 0;
+  
+      // **Depuración**: Imprime el subtotal en la consola para verificar los valores
+      console.log("Base Price:", basePrice);
+      console.log("Extras:", extraCost);
+      console.log("Removes:", removeDiscount);
+      console.log("Coupon Discount:", couponDiscount);
+      console.log("Calculated Subtotal:", subtotal);
+    }
+  
+    // Aplicar un cupón de descuento
+    function applyCoupon() {
+      const code = document.getElementById('coupon-code').value.trim();
+      let discount = 0;
+  
+      if (code === 'DESCUENTO10') {
+        discount = 10; // Descuento de $10
+      }
+  
+      if (discount > 0 && !appliedCoupons.some(c => c.code === code)) {
+        couponDiscount += discount;
+        appliedCoupons.push({ code, discount });
+        alert(`Cupón "${code}" aplicado. Descuento: $${discount}`);
+      } else if (appliedCoupons.some(c => c.code === code)) {
+        alert('Este cupón ya ha sido aplicado.');
+      } else {
+        alert('Cupón inválido.');
+      }
+  
+      updateSubtotal();
+    }
+  
+    // Añadir producto al carrito
+    function addToCart() {
+      const extras = Array.from(document.querySelectorAll('.extras input:checked')).map(extra => extra.dataset.name);
+      const removes = Array.from(document.querySelectorAll('.remove-options input:checked')).map(remove => remove.dataset.name);
+  
+      // Añadir el producto al carrito
+      cart.push({ size: 'Fanta', extras, removes, total: subtotal, coupons: [...appliedCoupons] });
+  
+      // Actualizar el contador del carrito
+      document.getElementById('cart-count').textContent = cart.length;
+  
+      // Resetear cupones aplicados y recalcular subtotal
+      appliedCoupons = [];
+      couponDiscount = 0;
+      updateSubtotal();
+  
+      alert('Producto añadido al carrito.');
+    }
+  
+    // Mostrar/ocultar el modal del carrito
+    function toggleCartModal() {
+      const modal = document.getElementById('cart-modal');
+      modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+      displayCart();
+    }
+  
+    // Mostrar el contenido del carrito
+    function displayCart() {
+      const cartItems = document.getElementById('cart-items');
+      const cartCoupons = document.getElementById('cart-coupons');
+      cartItems.innerHTML = '';
+      cartCoupons.innerHTML = '';
+      let total = 0;
+  
+      cart.forEach(item => {
+        const div = document.createElement('div');
+        div.innerHTML = `<p><strong>Hamburguesa:</strong> ${item.size}<br>
+          <strong>Extras:</strong> ${item.extras.join(', ')}<br>
+          <strong>Sin:</strong> ${item.removes.join(', ')}<br>
+          <strong>Total:</strong> $${item.total}</p>`;
+        cartItems.appendChild(div);
+        total += item.total;
+  
+        if (item.coupons.length > 0) {
+          const couponList = item.coupons.map(coupon => `${coupon.code} (-$${coupon.discount})`).join('<br>');
+          cartCoupons.innerHTML += `<p><strong>Cupones aplicados:</strong><br>${couponList}</p>`;
+        }
+      });
+  
+      document.getElementById('cart-total').textContent = total;
+    }
+  
+    // Redirigir a la página del carrito
+    function goToCart() {
+      localStorage.setItem('cart', JSON.stringify(cart));
+      window.location.href = 'carrito.html';
+    }
+  
+    // Event listeners para actualizar subtotal dinámicamente
+    document.querySelectorAll('.extras input, .remove-options input').forEach(input => {
+      input.addEventListener('change', updateSubtotal);
+    });
+  </script>
+  <script>
+  
+      // Mostrar el contenido del carrito
+      function displayCart() {
+        const cartItems = document.getElementById('cart-items');
+        const cartCoupons = document.getElementById('cart-coupons');
+        cartItems.innerHTML = '';
+        cartCoupons.innerHTML = '';
+        let total = 0;
+  
+        cart.forEach(item => {
+          const div = document.createElement('div');
+          div.innerHTML = `<p>Extras: ${item.extras.join(', ')}<br>Sin: ${item.removes.join(', ')}<br>Total: $${item.total}</p>`;
+          cartItems.appendChild(div);
+          total += item.total;
+  
+          if (item.coupons.length > 0) {
+            const couponList = item.coupons.map(coupon => `${coupon.code} (-$${coupon.discount})`).join('<br>');
+            cartCoupons.innerHTML += `<p><strong>Cupones aplicados:</strong><br>${couponList}</p>`;
+          }
+        });
+  
+        document.getElementById('cart-total').textContent = total;
+      }
+    </script>
+</body>
+</html>

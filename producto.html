@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selecciona tu Producto</title>
+    <link rel="stylesheet" href="styles_producto.css">
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <img src="logo.png" alt="Logo de la Empresa" class="logo">
+        </div>
+        <div class="header-right">
+            <a href="perfil.html"><img src="imagenes/perfil.jpg" alt="Perfil" class="icono-perfil"></a>
+            <div class="carrito-container">
+                <a href="carrito.html">
+                    <img src="imagenes/carrito.png" alt="Carrito" class="icono-carrito">
+                </a>
+                <span id="cantidad-carrito">0</span>
+                <!-- Contenedor para el resumen del carrito -->
+                <div id="resumen-carrito" class="resumen-carrito">
+                    <h4>Resumen del Carrito</h4>
+                    <div id="carrito-items"></div>
+                    <div id="carrito-total">Total: $0</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="product-container">
+            <img src="imagenes/Big Mac.jpeg" alt="Big Mac" class="product-image">
+
+            <form id="producto-form">
+                <h2>Hamburguesa Big Mac</h2>
+                <p>Hamburguesa con 2 carnes de res, con salsa especial de Big Mac y queso derretido.</p>
+
+                <label for="tamaño">Selecciona el tamaño:</label>
+                <select id="tamaño" name="tamaño">
+                    <option value="mediano" data-precio="109">Mediano - $109</option>
+                    <option value="grande" data-precio="129">Grande - $129</option>
+                </select>
+
+                <label for="cantidad">Cantidad:</label>
+                <input type="number" id="cantidad" name="cantidad" min="1" value="1">
+
+                <p id="precio-total">Precio Total: $109</p>
+
+                <!-- Sección para agregar más productos -->
+                <div class="agregar-mas">
+                    <h3>¿Quieres agregar algo más?</h3>
+                    <div class="productos-adicionales">
+                        <div>
+                            <img src="imagenes/patatas-onduladas.jpg" alt="Papas fritas" class="adicional" data-nombre="Papas fritas" data-precio="30">
+                            <div class="cantidad-adicional-container">
+                                <button class="btn-cantidad" data-accion="decrementar">-</button>
+                                <input type="number" min="0" value="0" class="cantidad-adicional" data-precio="30">
+                                <button class="btn-cantidad" data-accion="incrementar">+</button>
+                            </div>
+                            <span>Papas fritas</span>
+                        </div>
+                        <div>
+                            <img src="imagenes/refrescos-portada-1653207586.jpg" alt="Coca-Cola" class="adicional" data-nombre="Coca-Cola" data-precio="25">
+                            <div class="cantidad-adicional-container">
+                                <button class="btn-cantidad" data-accion="decrementar">-</button>
+                                <input type="number" min="0" value="0" class="cantidad-adicional" data-precio="25">
+                                <button class="btn-cantidad" data-accion="incrementar">+</button>
+                            </div>
+                            <span>Coca-Cola</span>
+                        </div>
+                        <div>
+                            <img src="imagenes/c1.png" alt="Hamburguesa" class="adicional" data-nombre="Hamburguesa" data-precio="50">
+                            <div class="cantidad-adicional-container">
+                                <button class="btn-cantidad" data-accion="decrementar">-</button>
+                                <input type="number" min="0" value="0" class="cantidad-adicional" data-precio="50">
+                                <button class="btn-cantidad" data-accion="incrementar">+</button>
+                            </div>
+                            <span>Hamburguesa</span>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" id="añadir-carrito">Añadir al Carrito</button>
+            </form>
+        </div>
+    </main>
+
+    <script src="script_producto.js"></script>
+</body>
+</html>
+
+
+
+

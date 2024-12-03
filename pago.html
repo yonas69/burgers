@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Pago</title>
+    <link rel="stylesheet" href="styles_pago.css">
+</head>
+<body>
+    <header>
+        <h1>Confirmar Pago</h1>
+    </header>
+
+    <main>
+        <form id="pago-form">
+            <div class="card-details">
+                <label for="numero-tarjeta">Número de Tarjeta:</label>
+                <input type="text" id="numero-tarjeta" name="numero-tarjeta" placeholder="1234 5678 9012 3456" required>
+
+                <label for="fecha-expiracion">Fecha de Expiración:</label>
+                <input type="text" id="fecha-expiracion" name="fecha-expiracion" placeholder="MM/AA" required>
+
+                <label for="cvv">CVC / CVV:</label>
+                <input type="text" id="cvv" name="cvv" placeholder="3 dígitos" required>
+
+                <label for="nombre-tarjeta">Nombre en la Tarjeta:</label>
+                <input type="text" id="nombre-tarjeta" name="nombre-tarjeta" placeholder="Juan Pérez" required>
+            </div>
+
+            <button type="submit" id="confirmar-pago">Confirmar Pago</button>
+        </form>
+    </main>
+
+    <script src="scrip_pago.js"></script>
+</body>
+</html>
+
